@@ -1,4 +1,4 @@
-package com.platzi.conf.ui
+package com.platzi.conf.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
