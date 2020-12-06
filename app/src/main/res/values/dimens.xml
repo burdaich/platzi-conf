@@ -6,4 +6,5 @@
     <dimen name="homeCardImageViewHeight">150dp</dimen>
     <dimen name="homeCardTitleTextSize">20sp</dimen>
     <dimen name="homeCardSubtitleMargin">10dp</dimen>
+    <dimen name="homeCardSubtitleTextSize">15sp</dimen>
 </resources>
