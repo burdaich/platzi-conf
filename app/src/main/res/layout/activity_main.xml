@@ -12,6 +12,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/toolbar_logo_height"
+                android:src="@drawable/logo_platzi_conf" />
         </Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 

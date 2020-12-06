@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="logo_platzi_height">45dp</dimen>
+    <dimen name="toolbar_logo_height">30dp</dimen>
+    <dimen name="cardCornerRadius">4dp</dimen>
+    <dimen name="homeCardImageViewHeight">150dp</dimen>
+    <dimen name="homeCardTitleTextSize">20sp</dimen>
+    <dimen name="homeCardSubtitleMargin">10dp</dimen>
 </resources>
