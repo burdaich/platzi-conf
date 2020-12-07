@@ -1,4 +1,4 @@
-package com.platzi.conf
+package com.platzi.conf.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.platzi.conf.model.Conference
