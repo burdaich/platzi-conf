@@ -21,6 +21,7 @@ class SpeakersViewModel {
             }
 
             override fun onSuccess(result: List<Speaker>?) {
+                listSpeakers.postValue(result)
                 processFinished()
             }
         })

@@ -5,7 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.platzi.conf.R
+import com.platzi.conf.model.Conference
+import com.platzi.conf.view.adapter.ScheduleAdapter
+import com.platzi.conf.view.adapter.ScheduleListener
+import com.platzi.conf.viewmodel.ScheduleViewModel
+import kotlinx.android.synthetic.main.fragment_schedule.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,18 +27,10 @@ private const val ARG_PARAM2 = "param2"
  * Use the [ScheduleFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ScheduleFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class ScheduleFragment : Fragment(), ScheduleListener {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var scheduleAdapter: ScheduleAdapter
+    private lateinit var scheduleViewModel: ScheduleViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,23 +40,36 @@ class ScheduleFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_schedule, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ScheduleFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ScheduleFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        scheduleViewModel = ViewModelProvider(this).get(ScheduleViewModel::class.java)
+        scheduleViewModel.refresh()
+
+        scheduleAdapter = ScheduleAdapter(this)
+
+        rvSchedule.apply {
+            layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
+            adapter = scheduleAdapter
+        }
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        scheduleViewModel.listSchedule.observe(
+            viewLifecycleOwner,
+            Observer<List<Conference>> { schedule ->
+                scheduleAdapter.updateData(schedule)
+            })
+
+        scheduleViewModel.isLoading.observe(viewLifecycleOwner, Observer<Boolean> {
+            if (it != null)
+                rlBaseSchedule.visibility = View.INVISIBLE
+        })
+    }
+
+    override fun onConferenceClick(conference: Conference, position: Int) {
+        val bundle = bundleOf("conference" to conference)
+        findNavController().navigate(R.id.scheduleDetailFragmentDialog, bundle)
     }
 }
