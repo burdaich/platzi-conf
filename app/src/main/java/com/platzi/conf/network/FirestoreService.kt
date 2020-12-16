@@ -28,7 +28,7 @@ class FirestoreService {
     }
 
     fun getSchedule(callback: Callback<List<Conference>>) {
-        firebaseFirestore.collection(CONFERENCES_COLLECTION_NAME).orderBy("category").get()
+        firebaseFirestore.collection(CONFERENCES_COLLECTION_NAME).get()
             .addOnSuccessListener { result ->
                 for (doc in result) {
                     val list = result.toObjects(Conference::class.java)

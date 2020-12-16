@@ -22,7 +22,7 @@ class SpeakersAdapter(val speakersListener: SpeakersListener) :
         val tvItemSpeakerWork = itemView.findViewById<TextView>(R.id.tvItemSpeakerWork);
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = SpeakersAdapter.ViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         LayoutInflater.from(parent.context).inflate(
             R.layout.item_speakers, parent, false
         )
@@ -30,7 +30,7 @@ class SpeakersAdapter(val speakersListener: SpeakersListener) :
 
     override fun getItemCount() = listSpeakers.size
 
-    override fun onBindViewHolder(holder: SpeakersAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val speaker = listSpeakers[position] as Speaker
         holder.tvItemSpeakerName.text = speaker.name
         holder.tvItemSpeakerWork.text = speaker.workplace
