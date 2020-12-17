@@ -70,5 +70,4 @@ class UbicationFragment : Fragment(), OnMapReadyCallback {
 
         googleMap?.addMarker(markerOptions)
     }
-K
 }
