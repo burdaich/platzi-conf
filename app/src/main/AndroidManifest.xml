@@ -17,16 +17,17 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDuk_gdcK1U533eqKA3uXXAFAGWwiz24WI" />
 
-        <activity android:name="com.platzi.conf.view.ui.activities.SplashScreenActivity"></activity>
         <activity
-            android:name=".view.ui.activities.MainActivity"
+            android:name=".view.ui.activities.SplashscreenActivity"
             android:theme="@style/Theme.PlatziConf.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".view.ui.activities.MainActivity"
+            android:theme="@style/Theme.PlatziConf.NoActionBar"></activity>
     </application>
 
 </manifest>
